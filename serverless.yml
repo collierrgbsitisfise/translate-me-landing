@@ -12,5 +12,5 @@ plugins:
 custom:
   client:
     bucketName: ${env:bucketName}
-    distributionFolder: build
+    distributionFolder: dist
     errorDocument: index.html
