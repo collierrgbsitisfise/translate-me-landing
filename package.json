@@ -32,7 +32,7 @@
     "watch": "run-p serve watch:*",
     "setup": "node scripts/setup.js",
     "deploy:dev": "serverless client deploy --stage dev --no-confirm",
-    "deploy:production": "serverless client deploy --stage production --no-confirm"
+    "deploy:prod": "serverless client deploy --stage prod --no-confirm"
   },
   "devDependencies": {
     "autoprefixer": "^9.0.1",

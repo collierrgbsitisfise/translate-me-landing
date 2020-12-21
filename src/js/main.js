@@ -105,7 +105,7 @@
     }
 
     // send POST request
-    fetch('http://localhost:3000/dev/save-email', options)
+    fetch('https://translate-me-api.boostup.link/save-email', options)
       .then(res => res.json())
       .then(res => {
         console.log(res)
