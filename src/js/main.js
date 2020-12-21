@@ -1,9 +1,15 @@
 (function () {
   const win = window
+  const fetch = win.fetch
   const doc = document.documentElement
 
   doc.classList.remove('no-js')
   doc.classList.add('js')
+
+  function validateEmail (inputText) {
+    const mailformat = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/
+    return inputText.match(mailformat)
+  }
 
   // Reveal animations
   if (document.body.classList.contains('has-animations')) {
@@ -85,6 +91,30 @@
   let winW = doc.clientWidth
   let winH = doc.clientHeight
 
+  // Send email
+  function sendEmail (e) {
+    const email = document.getElementById('email-value').value
+    if (!validateEmail(email)) {
+      return
+    }
+    console.log('KEK : ', email)
+    const options = {
+      method: 'POST',
+      body: JSON.stringify({ email }),
+      headers: { 'Content-Type': 'application/json' }
+    }
+
+    // send POST request
+    fetch('https://translate-me-api.boostup.link/save-email', options)
+      .then(res => res.json())
+      .then(res => {
+        console.log(res)
+        const email = document.getElementById('email-value')
+        email.value = ''
+      })
+      .catch(console.log)
+  }
+
   // Move Objects
   function moveObjects (e, object) {
     mouseX = e.pageX
@@ -118,6 +148,9 @@
     }
   }
 
+  const sendEmailBtn = document.getElementById('button-early-access')
+  sendEmailBtn.onclick = sendEmail
+  // document.getElementById("demo");
   // Call function with throttling
   if (movingObjects) {
     win.addEventListener('mousemove', throttle(
